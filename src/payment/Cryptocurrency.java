@@ -9,6 +9,8 @@ public class Cryptocurrency implements IPaymentMethod {
 
     @Override
     public void pay(Customer customer, Order order, double amount) {
+        customer.setFunds(customer.getFunds() - amount);
+        // Here you can check whether the customer has enough funds
         System.out.println(customer.getName() +
                 " a effectué(e) un paiement de " +
                 amount + "€ par cryptomonnaie pour la commande n°" +

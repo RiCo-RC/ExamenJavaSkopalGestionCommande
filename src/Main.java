@@ -152,6 +152,12 @@ public class Main {
 
         System.out.print("\n");
 
+        System.out.println("Avant : " + rico.getFunds());
+        creditsCards.pay(rico, rico_order, rico_order.getTotalPrice());
+        System.out.println("Après : " + rico.getFunds());
+
+        System.out.print("\n");
+
         stockCheck.handleOrder(rico_step);
         stockCheck.handleOrder(lip_step);
 

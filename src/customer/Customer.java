@@ -2,6 +2,8 @@ package customer;
 
 import notify.INotify;
 import order.Order;
+import transactionLogger.STransactionLogger;
+import transactionLogger.TransactionLogger;
 
 public class Customer implements INotify {
 
@@ -11,6 +13,8 @@ public class Customer implements INotify {
     private int id;
     private String name;
     private double funds;
+
+    private final TransactionLogger logger = STransactionLogger.getInstance();
 
     //-- CONSTRUCTOR --\\
 
@@ -51,6 +55,10 @@ public class Customer implements INotify {
     public Customer display() {
         System.out.println(this.name);
         return this;
+    }
+
+    public void log() {
+        this.logger.logRegisterCustomer(this);
     }
 
     //-- METHODS FROM INTERFACE --\\

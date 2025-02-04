@@ -1,5 +1,7 @@
 package manager;
 
+import order.EOrderStatus;
+
 public class OrderStepPaymentCheck implements IOrderValidation {
 
     //-- VARIABLES --\\
@@ -22,12 +24,14 @@ public class OrderStepPaymentCheck implements IOrderValidation {
                         "Etape de vérification : Payement | " +
                         " Succès : Erreur | " +
                         " Commentaire : Manque de fonds !");
+                order.setOrderStatus(EOrderStatus.CANCELLED);
                 canContinue = false;
             } else {
                 System.out.println("Commande n°" + order.getOrderId() + " : " +
                         "Etape de vérification : Payement | " +
                         " Succès : Bon | " +
                         " Commentaire : Le payment a été accepté !");
+                order.setOrderStatus(EOrderStatus.IN_PROGRESS);
             }
 
 

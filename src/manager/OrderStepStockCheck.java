@@ -1,5 +1,6 @@
 package manager;
 
+import order.EOrderStatus;
 import product.Product;
 
 import java.util.Map;
@@ -29,13 +30,14 @@ public class OrderStepStockCheck implements IOrderValidation {
                             "Etape de vérification : Stock | " +
                             " Succès : Erreur | " +
                             " Commentaire : Un ou plusieurs produits non pas assez de stock !");
+                    order.setOrderStatus(EOrderStatus.CANCELLED);
                     canContinue = false;
                 } else {
                     System.out.println("Commande n°" + order.getOrderId() + " : " +
                             "Etape de vérification : Stock | " +
                             " Succès : Bon | " +
                             " Commentaire : Les produits sont en stock !");
-
+                    order.setOrderStatus(EOrderStatus.IN_PROGRESS);
                 }
             }
         }

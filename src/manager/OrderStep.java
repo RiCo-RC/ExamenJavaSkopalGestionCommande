@@ -60,9 +60,17 @@ public class OrderStep {
         return this.order.getId();
     }
 
+    public void setOrderStatus(EOrderStatus status) {
+        this.order.setStatus(status);
+    }
+
+    public void getOrderStatus() {
+        this.order.getStatus();
+    }
+
     //-- METHODS --\\
 
     public void display() {
-        System.out.println(this.conclusion);
+        if (!this.conclusion.isEmpty()) System.out.println(this.conclusion);
     }
 }

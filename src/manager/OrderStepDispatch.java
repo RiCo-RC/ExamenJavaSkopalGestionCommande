@@ -1,5 +1,7 @@
 package manager;
 
+import order.EOrderStatus;
+
 public class OrderStepDispatch implements IOrderValidation {
 
     //-- VARIABLES --\\
@@ -20,10 +22,9 @@ public class OrderStepDispatch implements IOrderValidation {
             System.out.println("Commande n°" + order.getOrderId() + " : " +
                     "Etape de vérification : Final | " +
                     " Succès : Bon | " +
-                    " Tout est bon ! La commande est en cours de préparation !");
+                    " Tout est bon ! La commande est en cours d'envoie !");
+            order.setOrderStatus(EOrderStatus.DELIVERED);
         }
         if (canContinue && this.next != null) this.next.handleOrder(order);
     }
-
-
 }

@@ -135,6 +135,10 @@ public class Main {
         TransactionLogger anotherLogger = STransactionLogger.getInstance();
 
         //-- DISPLAY --\\
+        // (CECI FONCTIONNE, J'AI COMMENTE POUR AVOIR UNIQUEMENT LE LOG QUI S'AFFICHE
+        // DANS LA CONSOLE)
+
+        System.out.println("---------- TEST ----------");
 
         rico.display();
         lip.display();
@@ -155,9 +159,21 @@ public class Main {
         rico_step.display();
         lip_step.display();
 
+        logger.log("Hey sd!");
+
+        System.out.print("\n");
         System.out.print("\n");
 
-        logger.log("Hey sd!");
+        //-- LOG --\\
+
+        System.out.println("---------- LOG ----------");
+
+        ps5.log();
+        xboxSeriesX.log();
+        rico.log();
+        lip.log();
+        rico_order.log();
+        lip_order.log();
     }
 }
 

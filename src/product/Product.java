@@ -1,5 +1,8 @@
 package product;
 
+import transactionLogger.STransactionLogger;
+import transactionLogger.TransactionLogger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,8 @@ public class Product {
     private double price;
     private String category;
     private int quantity;
+
+    private final TransactionLogger logger = STransactionLogger.getInstance();
 
     //-- CONSTRUCTOR --\\
 
@@ -66,9 +71,15 @@ public class Product {
         return this.quantity;
     }
 
+    //-- METHODS --\\
+
     public Product display() {
         System.out.println(this);
         return this;
+    }
+
+    public void log() {
+        this.logger.logAddedProduct(this);
     }
 
     //-- DESIGN PATTERN: BUILDER --\\

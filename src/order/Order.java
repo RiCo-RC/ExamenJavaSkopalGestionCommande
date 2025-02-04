@@ -1,7 +1,10 @@
 package order;
 
 import customer.Customer;
+import notify.ONotifyOrder;
 import product.Product;
+import transactionLogger.STransactionLogger;
+import transactionLogger.TransactionLogger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +19,9 @@ public class Order {
     private String status;
     private Customer customer;
 
+    private final ONotifyOrder notifyOrder = new ONotifyOrder();
+    private final TransactionLogger logger = STransactionLogger.getInstance();
+
     //-- CONSTRUCTOR --\\
 
     public Order(OrderBuilder builder) {
@@ -24,6 +30,8 @@ public class Order {
         this.totalPrice = builder.totalPrice;
         this.status = builder.status;
         this.customer = builder.customer;
+
+        notifyOrder.addObserver(this.customer);
     }
 
     //-- SETTERS & GETTERS --\\
@@ -44,8 +52,10 @@ public class Order {
         return this.totalPrice;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(EOrderStatus status) {
+        this.status = this.getStatusToString(status);
+        this.notifyOrder.notify("Il y a un changement de statut pour votre commande");
+        this.logger.logUpdateStatusOrder(this);
     }
 
     public String getStatus() {
@@ -64,6 +74,23 @@ public class Order {
 
     public Map<Product, Integer> getProducts() {
         return this.products;
+    }
+
+    //-- METHODS --\\
+
+    public String getStatusToString(EOrderStatus status) {
+        if (status == EOrderStatus.IN_PROGRESS) {
+            return "En cours";
+        } else if (status == EOrderStatus.DELIVERED) {
+            return "Livrée";
+        } else if (status == EOrderStatus.CANCELLED) {
+            return "Annulée";
+        }
+        return "En attende";
+    }
+
+    public void log() {
+        logger.logCreateOrder(this);
     }
 
     //-- DESIGN PATTERN: BUILDER --\\

@@ -53,7 +53,8 @@ public class Customer implements INotify {
     //-- METHODS --\\
 
     public Customer display() {
-        System.out.println(this.name);
+        //System.out.println(this.name);
+        System.out.println(this);
         return this;
     }
 
